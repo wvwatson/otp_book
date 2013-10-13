@@ -1,5 +1,5 @@
 defmodule OtpSource.CustomErrorReport do
-  GenServer.Behaviour
+  GenEvent.Behaviour
 
   defrecord State, name: nil
 

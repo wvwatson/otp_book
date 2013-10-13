@@ -7,4 +7,5 @@ defmodule CustomErrorReportTest do
   test ".init should create a table with the same name as the module" do
     assert init([]) == {:ok, OtpSource.CustomErrorReport.State.new}
   end 
+
 end
