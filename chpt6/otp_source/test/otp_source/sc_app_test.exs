@@ -4,7 +4,7 @@ defmodule ScAppTest do
   use OtpSource.TestCase
   use Dynamo.HTTP.Case
 
-  test "start should return ok" do
+  test "start should return ok with a valid process id" do
     {atom, pid} = OtpSource.ScApp.start(OtpSource.ScApp,  [])
     case OtpSource.ScApp.start(OtpSource.ScApp,  []) do
       {:ok, pid} ->
