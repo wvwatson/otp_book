@@ -30,7 +30,7 @@ defmodule OtpSource.ScElement do
     of the lease time 
   """
   def create(value, leasetime) do
-    OtpSource.ScSup.start_child(value, leasetime)
+    OtpSource.ScElementSup.start_child(value, leasetime)
   end
      
   def create(value) do

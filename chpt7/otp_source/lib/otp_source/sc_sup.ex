@@ -7,24 +7,21 @@ defmodule OtpSource.ScSup do
     @server
   end
 
-  @doc """ 
-    creates a supervisor with a simple one for one strategy
-  """
   def init([]) do
-    element = {OtpSource.ScElement, {OtpSource.ScElement, :start_link, []},
-              :temporary, :brutal_kill, :worker, [OtpSource.ScElement]}
-    children = [element]
-    restart_strategy = {:simple_one_for_one, 0, 1}
-    # otp uses this return value ... cant test it
+    element_sup = {OtpSource.ScElementSup, {OtpSource.ScElementSup, :start_link, []},
+                  :permanent, 2000, :supervisor, [OtpSource.ScElement]}
+
+    event_manager = {OtpSource.ScEvent, {OtpSource.ScEvent, :start_link, []},
+                  :permanent, 2000, :worker, [OtpSource.ScEvent]}
+
+    children = [element_sup, event_manager]
+
+    restart_strategy = {:one_for_one, 4, 3600}
+
     {:ok, {restart_strategy, children}}
   end
 
   def start_link do
     :supervisor.start_link({:local, @server}, __MODULE__, [])
   end
-
-  def start_child(value, leasetime) do
-    :supervisor.start_child(@server, [value, leasetime])
-  end
-
 end

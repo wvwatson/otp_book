@@ -25,16 +25,5 @@ defmodule ScSupTest do
           assert is_pid(pid) == true
     end
   end
-
-  test ".start_child should start a child element" do
-    # must start supervisor first
-    Lager.debug "the ScSup.start_child test will fail on some runs and succeed on others for some reason ... perhaps we need a delay?"
-    {_atom, _pid} = OtpSource.ScApp.start(OtpSource.ScApp,  [])
-    # had to create ScElement first for this to work
-    {scstarted, scpid} = start_child("hmm", (60 * 60 * 24))
-    assert scstarted == :ok
-    assert is_pid(scpid) == true
-    #ret = :gen_server.cast(scpid, :stop)
-  end
-
 end
+

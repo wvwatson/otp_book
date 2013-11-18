@@ -3,7 +3,7 @@ defmodule OtpSource.ScApp do
 
   def start(_starttype, _startargs) do
     OtpSource.ScStore.init
-    case OtpSource.ScSup.start_link do
+    case OtpSource.ScElementSup.start_link do
       {:ok, pid} ->
         {:ok, pid}
       other ->
